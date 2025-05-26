@@ -459,6 +459,14 @@ _civet_safe_clock_gettime(int clk_id, struct timespec *t)
 #include "zlib.h"
 #endif
 
+/*
+ * uClibc does not implement gettid()
+ */
+#if defined __UCLIBC_HAS_THREADS__
+#include <sys/syscall.h>
+#define gettid() syscall(SYS_gettid)
+#endif
+
 
 /********************************************************************/
 /* CivetWeb configuration defines */
