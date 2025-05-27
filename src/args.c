@@ -372,6 +372,7 @@ void parse_args(int argc, char *argv[])
 		exit(read_teleporter_zip_from_disk(argv[2]) ? EXIT_SUCCESS : EXIT_FAILURE);
 	}
 
+#ifdef HAVE_MBEDTLS
 	// Generate X.509 certificate
 	if(argc > 1 && strcmp(argv[1], "--gen-x509") == 0)
 	{
@@ -439,6 +440,7 @@ void parse_args(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
+#endif // HAVE_MBEDTLS
 
 	// If the first argument is "gravity" (e.g., /usr/bin/pihole-FTL gravity),
 	// we offer some specialized gravity tools
@@ -1091,6 +1093,7 @@ void parse_args(int argc, char *argv[])
 			printf("\t                    current directory and print its name\n");
 			printf("\t%s--teleporter%s file%s   Import the Teleporter archive %sfile%s\n\n", green, cyan, normal, cyan, normal);
 
+#ifdef HAVE_MBEDTLS
 			printf("%sTLS X.509 certificate generator:%s\n", yellow, normal);
 			printf("    Generate a self-signed certificate suitable for SSL/TLS\n");
 			printf("    and store it in %soutfile%s.\n\n", cyan, normal);
@@ -1111,6 +1114,7 @@ void parse_args(int argc, char *argv[])
 			printf("    about the private key are printed as well.\n\n");
 			printf("    Usage: %s%s --read-x509 %s[certfile] %s[domain]%s\n", green, argv[0], cyan, purple, normal);
 			printf("    Usage: %s%s --read-x509-key %s[certfile] %s[domain]%s\n\n", green, argv[0], cyan, purple, normal);
+#endif // HAVE_MBEDTLS
 
 			printf("%sGravity tools:%s\n", yellow, normal);
 			printf("    Check domains in a given file for validity using Pi-hole's\n");
